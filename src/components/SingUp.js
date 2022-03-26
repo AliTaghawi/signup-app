@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import validate from './validate';
 
 const SingUp = () => {
   const [state, setState] = useState({
@@ -7,17 +11,44 @@ const SingUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    isAccepted: false,
-  });
+    isAccepted: false
+  })
+  const [errors, setErrors] = useState({})
+  const [touched, setTouched] = useState({})
 
+  useEffect(()=> {
+    setErrors(validate(state))
+    console.log(errors)
+  }, [state, touched])
+  
   const changHandelr = (event) => {
     if (event.target.name === "isAccepted") {
       setState({ ...state, [event.target.name]: event.target.checked });
     } else {
       setState({ ...state, [event.target.name]: event.target.value });
     }
-    console.log(state);
-  };
+  }
+
+  const focusHandeler = event => {
+    setTouched({...touched, [event.target.name]: true})
+  }
+
+  const submitHandeler = event => {
+    event.preventDefault();
+    if (!Object.keys(errors).length) {
+      console.log(state);
+      toast.success('You signed up successfully');
+    } else {
+      setTouched({
+        name: true,
+        email: true,
+        password: true,
+        confirmPassword: true,
+        isAccepted: true
+      });
+      toast.error('Invalid data!!!');
+    }
+  }
 
   return (
     <div style={{ display: "inline-block", width: "350px" }}>
@@ -80,6 +111,7 @@ const SingUp = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
