@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import validate from './validate';
+import styles from './SingUp.modole.css';
 
 const SingUp = () => {
   const [state, setState] = useState({
@@ -50,7 +51,7 @@ const SingUp = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container} >
       <form>
         <h2>Sign Up</h2>
         <div>
