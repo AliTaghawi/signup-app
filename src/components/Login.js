@@ -41,19 +41,31 @@ const Login = () => {
 
   return (
     <div className={styles.container} >
-      <form>
+      <form className={styles.formContainer}>
         <h2>Login</h2>
-        <div>
+        <div className={styles.formField}>
           <label>Email:</label>
-          <input type="text" name="email" value={state.email} onChange={changHandelr} onFocus={focusHandeler} />
+          <input 
+          className={(touched.email && errors.email) ? styles.unCompleted : styles.formInput}
+          type="text" 
+          name="email" 
+          value={state.email} 
+          onChange={changHandelr} 
+          onFocus={focusHandeler} />
           {touched.email && errors.email && <span>{errors.email}</span>}
         </div>
-        <div>
+        <div className={styles.formField}>
           <label>Password:</label>
-          <input type="password" name="password" value={state.password} onChange={changHandelr} onFocus={focusHandeler} />
+          <input 
+          className={(touched.password && errors.password) ? styles.unCompleted : styles.formInput}
+          type="password" 
+          name="password" 
+          value={state.password} 
+          onChange={changHandelr} 
+          onFocus={focusHandeler} />
           {touched.password && errors.password && <span>{errors.password}</span>}
         </div>
-        <div>
+        <div className={styles.buttonsField}>
           <Link to='/singup'>SingUp</Link>
           <button type='submit' onClick={submitHandeler} >Login</button>
         </div>
