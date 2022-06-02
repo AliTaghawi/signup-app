@@ -44,5 +44,4 @@ const validate = (data, type) => {
 
   return errors
 }
-
 export default validate;
